@@ -110,7 +110,22 @@ cat("True Probability:",round(pnorm(1.95)-pnorm(-1),4))
 # 과제
 # 생일문제 : 상황 B에서 k = 5, 10, 25, 50, 100일 때 통계적 확률을 추정할 것. 반복수는 100000번
 
+n <- 365
+nomembers <- c(5, 10, 25, 50, 100)
+probs <- NULL
+nosim <- 100000
 
+for (k in nomembers){
+  result <- 0
+  ''
+  for (i in 1:nosim){
+    x <- sample.int(n, k, replace=T, prob=birthprob)
+    result <- result + (length(unique(x)) == k)
+  }
+  cat(k, '명 선택할 때\n ')
+  cat('# of 생일이 모두 다른 경우:', result, "\n")
+  cat('생일이 모두 다를 확률:', result/nosim, '\n')
+}
 
 
 
